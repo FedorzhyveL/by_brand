@@ -1,5 +1,5 @@
 import 'package:by_brand/data/models/product.dart';
-import 'package:by_brand/presentation/home/bloc/home_bloc.dart';
+import 'package:by_brand/presentation/home_page/bloc/home_bloc.dart';
 import 'package:by_brand/presentation/widgets/cards/categorie_card.dart';
 import 'package:flutter/material.dart';
 

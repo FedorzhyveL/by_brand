@@ -1,4 +1,5 @@
-import 'package:by_brand/presentation/home/bloc/home_bloc.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:by_brand/presentation/home_page/bloc/home_bloc.dart';
 import 'package:by_brand/presentation/widgets/cards/address_card.dart';
 import 'package:by_brand/presentation/widgets/cards/categorie_card.dart';
 import 'package:by_brand/presentation/widgets/cards/order_card.dart';
@@ -9,6 +10,7 @@ import 'package:by_brand/presentation/widgets/cards/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,10 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomeBloc _bloc;
+  late final HomeBloc _bloc;
+  late final ScrollController _scrollController;
   @override
   void initState() {
     _bloc = HomeBloc();
+    _scrollController = ScrollController();
     super.initState();
   }
 
@@ -31,66 +35,41 @@ class _HomePageState extends State<HomePage> {
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: const Text(
-                'Marketplace Data Base',
-                textAlign: TextAlign.center,
-              ),
-              actions: [
-                IconButton(
-                    onPressed: (_bloc.state.loading || _bloc.state.selectedTable == DataBaseTables.choose)
-                        ? null
-                        : () => showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (context) => SingleChildScrollView(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: switch (state.selectedTable) {
-                                  DataBaseTables.choose => const SizedBox(),
-                                  DataBaseTables.users => UserCard(bloc: _bloc),
-                                  DataBaseTables.addresses => AddressCard(bloc: _bloc),
-                                  DataBaseTables.categories => CategorieCard(bloc: _bloc),
-                                  DataBaseTables.orders => OrderCard(bloc: _bloc),
-                                  DataBaseTables.products => ProductCard(bloc: _bloc),
-                                  DataBaseTables.reviews => ReviewCard(bloc: _bloc),
-                                  DataBaseTables.roles => RoleCard(bloc: _bloc),
-                                },
+            body: SingleChildScrollView(
+              controller: _scrollController,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  runSpacing: 8,
+                  spacing: 8,
+                  children: List.generate(
+                    10,
+                    (index) => Container(
+                      width: MediaQuery.sizeOf(context).width * 0.45,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Column(
+                        children: [
+                          RotatedBox(
+                            quarterTurns: 1,
+                            child: Image(
+                              color: Colors.black,
+                              image: NetworkImage(
+                                'https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png',
                               ),
                             ),
-                    icon: const Icon(
-                      Icons.add_rounded,
-                      color: Colors.green,
-                      size: 40,
-                    ))
-              ],
-            ),
-            body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Выберите таблицу',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  DropdownButton(
-                    value: state.selectedTable,
-                    hint: const Text('выберите таблицу'),
-                    items: List.generate(
-                      DataBaseTables.values.length,
-                      (index) => DropdownMenuItem(
-                        value: DataBaseTables.values[index],
-                        child: Text(DataBaseTables.values[index].toString().split('.').last),
+                          ),
+                          Text('price'),
+                          Text('info 1'),
+                          Text('info 2'),
+                          Text('info 3'),
+                        ],
                       ),
                     ),
-                    onChanged: _bloc.state.loading
-                        ? null
-                        : (DataBaseTables? newValue) => _bloc.add(
-                              ChangeDataBaseTable(table: newValue),
-                            ),
                   ),
-                  _bloc.state.loading ? const CircularProgressIndicator() : Expanded(child: DataList(_bloc)),
-                ],
+                ),
               ),
             ),
           );
