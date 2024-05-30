@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:by_brand/presentation/home_page/home_page.dart';
+import 'package:by_brand/presentation/home_page/product_datail_page.dart';
+import 'package:by_brand/presentation/home_page/product_overview_page.dart';
 import 'package:by_brand/presentation/login_screen/login_screen.dart';
 import 'package:by_brand/presentation/main_screen/main_screen.dart';
 import 'package:by_brand/presentation/profile_page/profile_page.dart';
@@ -15,7 +17,13 @@ class AppRouter extends _$AppRouter {
           page: MainRoute.page,
           initial: true,
           children: [
-            AutoRoute(page: HomeRoute.page),
+            AutoRoute(
+              page: HomeRoute.page,
+              children: [
+                AutoRoute(page: ProductOverViewRoute.page, initial: true),
+                AutoRoute(page: ProductDetailRoute.page),
+              ],
+            ),
             AutoRoute(page: ProfileRoute.page),
           ],
         ),

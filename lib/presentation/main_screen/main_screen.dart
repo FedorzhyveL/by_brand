@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
             appBar: AppBar(
               centerTitle: true,
               title: const Text(
-                'By Brand Marketplace',
+                'Marketplace',
                 textAlign: TextAlign.center,
               ),
             ),

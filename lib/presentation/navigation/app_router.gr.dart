@@ -33,6 +33,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainScreen(),
       );
     },
+    ProductDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProductDetailPage(),
+      );
+    },
+    ProductOverViewRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProductOverViewPage(),
+      );
+    },
     ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -86,6 +98,34 @@ class MainRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProductDetailPage]
+class ProductDetailRoute extends PageRouteInfo<void> {
+  const ProductDetailRoute({List<PageRouteInfo>? children})
+      : super(
+          ProductDetailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductDetailRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProductOverViewPage]
+class ProductOverViewRoute extends PageRouteInfo<void> {
+  const ProductOverViewRoute({List<PageRouteInfo>? children})
+      : super(
+          ProductOverViewRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductOverViewRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
