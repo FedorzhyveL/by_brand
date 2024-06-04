@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       create: (context) => _bloc,
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return const Scaffold(body: AutoRouter());
+          return const AutoRouter();
         },
       ),
     );
