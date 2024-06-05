@@ -1,5 +1,5 @@
 import 'package:by_brand/data/api/rest_constants.dart';
-import 'package:by_brand/data/models/user.dart';
+import 'package:by_brand/domain/models/user.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 

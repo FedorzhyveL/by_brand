@@ -1,4 +1,4 @@
-import 'package:by_brand/data/models/address.dart';
+import 'package:by_brand/domain/models/address.dart';
 import 'package:by_brand/presentation/home_page/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 

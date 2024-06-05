@@ -1,5 +1,5 @@
-import 'package:by_brand/data/models/address.dart';
-import 'package:by_brand/data/models/role.dart';
+import 'package:by_brand/domain/models/address.dart';
+import 'package:by_brand/domain/models/role.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';

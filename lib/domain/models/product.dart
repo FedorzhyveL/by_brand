@@ -1,4 +1,4 @@
-import 'package:by_brand/data/models/categorie.dart';
+import 'package:by_brand/domain/models/categorie.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'product.g.dart';
 

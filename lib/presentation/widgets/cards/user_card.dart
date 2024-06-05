@@ -1,4 +1,4 @@
-import 'package:by_brand/data/models/user.dart';
+import 'package:by_brand/domain/models/user.dart';
 import 'package:by_brand/presentation/home_page/bloc/home_bloc.dart';
 import 'package:by_brand/presentation/widgets/cards/address_card.dart';
 import 'package:by_brand/presentation/widgets/cards/role_card.dart';
