@@ -29,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
       child: AutoTabsRouter(
         routes: const [
           HomeRoute(),
+          CartRoute(),
           ProfileRoute(),
         ],
         builder: (context, child) {
@@ -49,6 +50,10 @@ class _MainScreenState extends State<MainScreen> {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart_rounded),
+                  label: 'Cart',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.supervised_user_circle_outlined),
