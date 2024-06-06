@@ -21,7 +21,10 @@ class AppRouter extends _$AppRouter {
             AutoRoute(
               page: HomeRoute.page,
               children: [
-                AutoRoute(page: ProductOverViewRoute.page, initial: true),
+                AutoRoute(
+                  page: ProductOverViewRoute.page,
+                  initial: true,
+                ),
                 AutoRoute(page: ProductDetailRoute.page),
               ],
             ),
@@ -29,11 +32,7 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: ProfileRoute.page),
           ],
         ),
-        AutoRoute(
-          page: LoginRoute.page,
-        ),
-        AutoRoute(
-          page: RegistrationRoute.page,
-        )
+        AutoRoute(page: LoginRoute.page),
+        AutoRoute(page: RegistrationRoute.page),
       ];
 }

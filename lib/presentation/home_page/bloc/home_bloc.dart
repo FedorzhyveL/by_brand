@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:by_brand/core/di.dart';
 import 'package:by_brand/domain/models/address.dart';
 import 'package:by_brand/domain/models/categorie.dart';
 import 'package:by_brand/domain/models/order.dart';
@@ -6,7 +7,6 @@ import 'package:by_brand/domain/models/product.dart';
 import 'package:by_brand/domain/models/review.dart';
 import 'package:by_brand/domain/models/role.dart';
 import 'package:by_brand/domain/models/user.dart';
-import 'package:by_brand/main.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';

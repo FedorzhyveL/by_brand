@@ -7,11 +7,15 @@ import 'package:get_it/get_it.dart';
 final GetIt injector = GetIt.instance;
 
 Future<void> inject() async {
-  injector.registerLazySingleton(() {
-    return Dio(BaseOptions(baseUrl: RestConstants.baseUrl));
-  });
+  injector.registerLazySingleton(() => Dio(
+        BaseOptions(baseUrl: RestConstants.baseUrl),
+      ));
 
-  injector.registerLazySingleton<AppRouter>(() => AppRouter());
+  injector.registerLazySingleton<AppRouter>(
+    () => AppRouter(),
+  );
 
-  injector.registerLazySingleton<FlutterSecureStorage>(() => const FlutterSecureStorage());
+  injector.registerLazySingleton<FlutterSecureStorage>(
+    () => const FlutterSecureStorage(),
+  );
 }
