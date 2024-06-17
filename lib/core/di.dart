@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
-final GetIt injector = GetIt.instance;
+final GetIt injector = GetIt.I;
 
 Future<void> inject() async {
   injector.registerLazySingleton(() => Dio(

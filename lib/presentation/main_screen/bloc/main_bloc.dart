@@ -16,6 +16,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         _MainInitialEvent() => await _initialEvent(emit, event),
       },
     );
+    add(MainEvent.initial());
   }
 
   Future<void> _initialEvent(Emitter<MainState> emit, _MainInitialEvent event) async {
