@@ -56,42 +56,19 @@ class _CategorieCardState extends State<CategorieCard> {
                   ),
                 ),
                 if (widget.categorie != null) ...[
+                  IconButton(onPressed: null, icon: const Icon(Icons.edit_rounded)),
                   IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc.add(
-                                EditDataEvent(
-                                  id: widget.categorie?.id,
-                                  table: DataBaseTables.addresses,
-                                  data: widget.categorie
-                                      ?.copyWith(
-                                        name: nameController.text,
-                                        description: descriptionController.text,
-                                      )
-                                      .toJson(),
-                                ),
-                              ),
-                      icon: const Icon(Icons.edit_rounded)),
-                  IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc
-                              .add(DeleteDataEvent(id: widget.categorie?.id, table: DataBaseTables.categories)),
-                      icon: const Icon(Icons.delete_rounded))
+                    onPressed: null,
+                    icon: const Icon(
+                      Icons.delete_rounded,
+                    ),
+                  ),
                 ],
               ],
             ),
             if (widget.categorie == null)
               IconButton(
                 onPressed: () {
-                  widget.bloc.add(
-                    AddDataToTableEvent(
-                      data: Categorie(
-                        name: nameController.text,
-                        description: descriptionController.text,
-                      ).toJson(),
-                    ),
-                  );
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(

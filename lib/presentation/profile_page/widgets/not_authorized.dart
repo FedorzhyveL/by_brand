@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:by_brand/core/di.dart';
 import 'package:by_brand/presentation/navigation/app_router.dart';
-import 'package:flutter/material.dart';
 
 class NotAuthorized extends StatelessWidget {
   const NotAuthorized({super.key});

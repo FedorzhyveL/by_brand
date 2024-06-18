@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+
 import 'package:by_brand/core/di.dart';
 import 'package:by_brand/presentation/navigation/app_router.dart';
 import 'package:by_brand/presentation/widgets/text_input_form.dart';
-import 'package:flutter/material.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {

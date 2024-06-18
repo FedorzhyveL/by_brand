@@ -103,54 +103,14 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ),
                 if (widget.product != null) ...[
-                  IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc.add(
-                                EditDataEvent(
-                                  id: widget.product?.id,
-                                  table: DataBaseTables.addresses,
-                                  data: widget.product
-                                      ?.copyWith(
-                                        seller_id: int.tryParse(sellerIdController.text),
-                                        name: nameController.text,
-                                        description: descriptionController.text,
-                                        price: int.tryParse(priceController.text),
-                                        quantity: int.tryParse(quantityController.text),
-                                        sale: int.tryParse(saleController.text),
-                                      )
-                                      .toJson(),
-                                ),
-                              ),
-                      icon: const Icon(Icons.edit_rounded)),
-                  IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc.add(
-                                DeleteDataEvent(
-                                  id: widget.product?.id,
-                                  table: DataBaseTables.products,
-                                ),
-                              ),
-                      icon: const Icon(Icons.delete_rounded))
+                  IconButton(onPressed: null, icon: const Icon(Icons.edit_rounded)),
+                  IconButton(onPressed: null, icon: const Icon(Icons.delete_rounded))
                 ],
               ],
             ),
             if (widget.product == null)
               IconButton(
                 onPressed: () {
-                  widget.bloc.add(
-                    AddDataToTableEvent(
-                      data: Product(
-                        name: nameController.text,
-                        description: descriptionController.text,
-                        seller_id: int.tryParse(sellerIdController.text),
-                        price: int.tryParse(priceController.text),
-                        quantity: int.tryParse(quantityController.text),
-                        sale: int.tryParse(saleController.text),
-                      ).toJson(),
-                    ),
-                  );
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(

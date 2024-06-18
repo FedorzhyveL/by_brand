@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:by_brand/core/di.dart';
-import 'package:by_brand/presentation/main_screen/bloc/main_bloc.dart';
-import 'package:by_brand/presentation/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:by_brand/core/di.dart';
+import 'package:by_brand/domain/use_cases/get_categories_use_case.dart';
+import 'package:by_brand/presentation/main_screen/bloc/main_bloc.dart';
+import 'package:by_brand/presentation/navigation/app_router.dart';
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
@@ -19,7 +22,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _bloc = MainBloc(injector.get());
+    _bloc = MainBloc(
+      injector.get<FlutterSecureStorage>(),
+      injector.get<GetCategoriesUseCase>(),
+    );
   }
 
   @override

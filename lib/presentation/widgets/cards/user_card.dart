@@ -83,48 +83,16 @@ class _UserCardState extends State<UserCard> {
                 ),
                 if (widget.user != null) ...[
                   IconButton(
-                    onPressed: widget.bloc.state.loading
-                        ? null
-                        : () => widget.bloc.add(
-                              EditDataEvent(
-                                id: widget.user?.id,
-                                table: DataBaseTables.addresses,
-                                data: widget.user
-                                    ?.copyWith(
-                                      username: userNameController.text,
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                    )
-                                    .toJson(),
-                              ),
-                            ),
+                    onPressed: null,
                     icon: const Icon(Icons.edit_rounded),
                   ),
-                  IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc.add(
-                                DeleteDataEvent(
-                                  id: widget.user?.id,
-                                  table: DataBaseTables.users,
-                                ),
-                              ),
-                      icon: const Icon(Icons.delete_rounded))
+                  IconButton(onPressed: null, icon: const Icon(Icons.delete_rounded))
                 ],
               ],
             ),
             if (widget.user == null)
               IconButton(
                 onPressed: () {
-                  widget.bloc.add(
-                    AddDataToTableEvent(
-                      data: User(
-                        username: userNameController.text,
-                        email: emailController.text,
-                        password: passwordController.text,
-                      ).toJson(),
-                    ),
-                  );
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(

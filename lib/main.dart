@@ -2,8 +2,8 @@ import 'package:by_brand/core/di.dart';
 import 'package:by_brand/presentation/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 
-Future<void> main() async {
-  await inject();
+void main() {
+  inject();
   runApp(const MyApp());
 }
 

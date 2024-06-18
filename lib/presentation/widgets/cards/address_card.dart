@@ -95,49 +95,21 @@ class _AddressCardState extends State<AddressCard> {
                 ),
                 if (widget.address != null) ...[
                   IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () => widget.bloc.add(
-                                EditDataEvent(
-                                  id: widget.address?.id,
-                                  table: DataBaseTables.addresses,
-                                  data: widget.address
-                                      ?.copyWith(
-                                        user_id: int.tryParse(userIdController.text),
-                                        street: streetController.text,
-                                        apartment: apartmentController.text,
-                                        city: cityController.text,
-                                        zipcode: int.tryParse(zipCodeController.text),
-                                        country: countryController.text,
-                                      )
-                                      .toJson(),
-                                ),
-                              ),
-                      icon: const Icon(Icons.edit_rounded)),
+                    onPressed: null,
+                    icon: const Icon(Icons.edit_rounded),
+                  ),
                   IconButton(
-                      onPressed: widget.bloc.state.loading
-                          ? null
-                          : () =>
-                              widget.bloc.add(DeleteDataEvent(id: widget.address?.id, table: DataBaseTables.addresses)),
-                      icon: const Icon(Icons.delete_rounded)),
+                    onPressed: null,
+                    icon: const Icon(
+                      Icons.delete_rounded,
+                    ),
+                  ),
                 ],
               ],
             ),
             if (widget.address == null)
               IconButton(
                 onPressed: () {
-                  widget.bloc.add(
-                    AddDataToTableEvent(
-                      data: Address(
-                        user_id: int.tryParse(userIdController.text),
-                        street: streetController.text,
-                        city: cityController.text,
-                        apartment: apartmentController.text,
-                        zipcode: int.tryParse(zipCodeController.text),
-                        country: countryController.text,
-                      ).toJson(),
-                    ),
-                  );
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(
