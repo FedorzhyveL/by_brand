@@ -176,19 +176,25 @@ mixin _$MainState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String? user, List<Categorie> categories) loaded,
+    required TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? user, List<Categorie> categories)? loaded,
+    TResult? Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? user, List<Categorie> categories)? loaded,
+    TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -276,7 +282,9 @@ class _$InitalMainStateImpl extends _InitalMainState
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String? user, List<Categorie> categories) loaded,
+    required TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)
+        loaded,
   }) {
     return initial();
   }
@@ -285,7 +293,9 @@ class _$InitalMainStateImpl extends _InitalMainState
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? user, List<Categorie> categories)? loaded,
+    TResult? Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -294,7 +304,9 @@ class _$InitalMainStateImpl extends _InitalMainState
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? user, List<Categorie> categories)? loaded,
+    TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -346,7 +358,10 @@ abstract class _$$LoadedMainStateImplCopyWith<$Res> {
           $Res Function(_$LoadedMainStateImpl) then) =
       __$$LoadedMainStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? user, List<Categorie> categories});
+  $Res call(
+      {String? user,
+      List<ProductCategorie> categories,
+      List<Product> products});
 }
 
 /// @nodoc
@@ -362,6 +377,7 @@ class __$$LoadedMainStateImplCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
     Object? categories = null,
+    Object? products = null,
   }) {
     return _then(_$LoadedMainStateImpl(
       user: freezed == user
@@ -371,7 +387,11 @@ class __$$LoadedMainStateImplCopyWithImpl<$Res>
       categories: null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
-              as List<Categorie>,
+              as List<ProductCategorie>,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
     ));
   }
 }
@@ -381,24 +401,36 @@ class __$$LoadedMainStateImplCopyWithImpl<$Res>
 class _$LoadedMainStateImpl extends _LoadedMainState
     with DiagnosticableTreeMixin {
   _$LoadedMainStateImpl(
-      {this.user, final List<Categorie> categories = const []})
+      {this.user,
+      final List<ProductCategorie> categories = const [],
+      final List<Product> products = const []})
       : _categories = categories,
+        _products = products,
         super._();
 
   @override
   final String? user;
-  final List<Categorie> _categories;
+  final List<ProductCategorie> _categories;
   @override
   @JsonKey()
-  List<Categorie> get categories {
+  List<ProductCategorie> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categories);
   }
 
+  final List<Product> _products;
+  @override
+  @JsonKey()
+  List<Product> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainState.loaded(user: $user, categories: $categories)';
+    return 'MainState.loaded(user: $user, categories: $categories, products: $products)';
   }
 
   @override
@@ -407,7 +439,8 @@ class _$LoadedMainStateImpl extends _LoadedMainState
     properties
       ..add(DiagnosticsProperty('type', 'MainState.loaded'))
       ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('categories', categories));
+      ..add(DiagnosticsProperty('categories', categories))
+      ..add(DiagnosticsProperty('products', products));
   }
 
   @override
@@ -417,12 +450,16 @@ class _$LoadedMainStateImpl extends _LoadedMainState
             other is _$LoadedMainStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(_categories));
+      runtimeType,
+      user,
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_products));
 
   @JsonKey(ignore: true)
   @override
@@ -435,29 +472,35 @@ class _$LoadedMainStateImpl extends _LoadedMainState
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String? user, List<Categorie> categories) loaded,
+    required TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)
+        loaded,
   }) {
-    return loaded(user, categories);
+    return loaded(user, categories, products);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? user, List<Categorie> categories)? loaded,
+    TResult? Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
   }) {
-    return loaded?.call(user, categories);
+    return loaded?.call(user, categories, products);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? user, List<Categorie> categories)? loaded,
+    TResult Function(String? user, List<ProductCategorie> categories,
+            List<Product> products)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(user, categories);
+      return loaded(user, categories, products);
     }
     return orElse();
   }
@@ -497,11 +540,13 @@ class _$LoadedMainStateImpl extends _LoadedMainState
 abstract class _LoadedMainState extends MainState {
   factory _LoadedMainState(
       {final String? user,
-      final List<Categorie> categories}) = _$LoadedMainStateImpl;
+      final List<ProductCategorie> categories,
+      final List<Product> products}) = _$LoadedMainStateImpl;
   _LoadedMainState._() : super._();
 
   String? get user;
-  List<Categorie> get categories;
+  List<ProductCategorie> get categories;
+  List<Product> get products;
   @JsonKey(ignore: true)
   _$$LoadedMainStateImplCopyWith<_$LoadedMainStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

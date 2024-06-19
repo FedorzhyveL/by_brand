@@ -1,4 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+
+import 'package:flutter/material.dart';
+
+import 'package:by_brand/domain/models/product_model.dart';
 import 'package:by_brand/presentation/cart_page/cart_page.dart';
 import 'package:by_brand/presentation/home_page/home_page.dart';
 import 'package:by_brand/presentation/home_page/product_datail_page.dart';

@@ -1,3 +1,6 @@
+import 'package:by_brand/data/repositories_impl/products_repository_impl.dart';
+import 'package:by_brand/domain/repositories/products_repository.dart';
+import 'package:by_brand/domain/use_cases/get_products_use_case.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -15,7 +18,7 @@ void inject() {
   final dio = Dio(
     BaseOptions(
       baseUrl: RestConstants.baseUrl,
-      connectTimeout: Duration(minutes: 1),
+      connectTimeout: const Duration(minutes: 1),
     ),
   );
   dio.interceptors.add(
@@ -45,12 +48,24 @@ void injectRepositories() {
       restClient: injector.get<RestClient>(),
     ),
   );
+
+  injector.registerLazySingleton<ProductsRepository>(
+    () => ProductsRepositoryImpl(
+      restClient: injector.get<RestClient>(),
+    ),
+  );
 }
 
 void injectUseCases() {
   injector.registerLazySingleton<GetCategoriesUseCase>(
     () => GetCategoriesUseCase(
       categoriesRepository: injector.get<CategoriesRepository>(),
+    ),
+  );
+
+  injector.registerLazySingleton<GetProductsUseCase>(
+    () => GetProductsUseCase(
+      categoriesRepository: injector.get<ProductsRepository>(),
     ),
   );
 }

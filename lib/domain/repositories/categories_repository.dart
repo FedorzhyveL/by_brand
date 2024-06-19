@@ -1,5 +1,5 @@
-import 'package:by_brand/domain/models/categorie.dart';
+import 'package:by_brand/domain/models/product_categorie.dart';
 
 abstract class CategoriesRepository {
-  Future<List<Categorie>> getCategories({int? page, int? size});
+  Future<List<ProductCategorie>> getCategories({int? page, int? size});
 }

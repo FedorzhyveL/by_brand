@@ -1,6 +1,7 @@
 #generated code
 *.g.dart
 *.gr.dart
+*.freezed.dart
 
 # Miscellaneous
 *.class

@@ -19,7 +19,12 @@ abstract class RestClient {
   );
 
   @GET(RestConstants.categories)
-  Future<BaseDTOListData> getCategories(
+  Future<BaseDTOList> getCategories(
+    @Queries() Map<String, dynamic> queries,
+  );
+
+  @GET(RestConstants.products)
+  Future<BaseDTOList> getProducts(
     @Queries() Map<String, dynamic> queries,
   );
 }

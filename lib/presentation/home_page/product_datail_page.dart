@@ -1,12 +1,19 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:by_brand/presentation/cart_page/bloc/cart_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:by_brand/domain/models/product_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 @RoutePage()
 class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({super.key});
+  const ProductDetailPage({
+    super.key,
+    required this.product,
+  });
+  final Product product;
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -29,41 +36,51 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   height: MediaQuery.sizeOf(context).height * 0.5,
                   child: Stack(
                     children: [
-                      PageView(
-                        physics: const ClampingScrollPhysics(),
-                        children: [
-                          FittedBox(
-                            fit: BoxFit.cover,
-                            child: CachedNetworkImage(
-                              imageUrl: 'https://i.pinimg.com/564x/2c/8e/98/2c8e981280d108b806c2e07bfbcc15b9.jpg',
-                            ),
-                          ),
-                          FittedBox(
-                            fit: BoxFit.cover,
-                            child: CachedNetworkImage(
-                              imageUrl: 'https://i.pinimg.com/564x/0d/d4/94/0dd494d3fef5754409b0df24d9f055e8.jpg',
-                            ),
-                          ),
-                          FittedBox(
-                            fit: BoxFit.cover,
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  'https://img.freepik.com/free-photo/stunning-square-portrait-adorable-cute-cat_181624-37290.jpg?t=st=1717158160~exp=1717161760~hmac=1cab70094d4601341be6de4fbdb87dd499a225fa21b18b33ff909c9635c152ec&w=740',
-                            ),
-                          ),
-                        ],
+                      Shimmer.fromColors(
+                        baseColor: Colors.white,
+                        highlightColor: Colors.grey,
+                        child: Container(
+                          color: Colors.white,
+                        ),
                       ),
+                      // PageView(
+                      //   physics: const ClampingScrollPhysics(),
+                      //   children: [
+                      //     FittedBox(
+                      //       fit: BoxFit.cover,
+                      //       child: CachedNetworkImage(
+                      //         imageUrl: 'https://i.pinimg.com/564x/2c/8e/98/2c8e981280d108b806c2e07bfbcc15b9.jpg',
+                      //       ),
+                      //     ),
+                      //     FittedBox(
+                      //       fit: BoxFit.cover,
+                      //       child: CachedNetworkImage(
+                      //         imageUrl: 'https://i.pinimg.com/564x/0d/d4/94/0dd494d3fef5754409b0df24d9f055e8.jpg',
+                      //       ),
+                      //     ),
+                      //     FittedBox(
+                      //       fit: BoxFit.cover,
+                      //       child: CachedNetworkImage(
+                      //         imageUrl:
+                      //             'https://img.freepik.com/free-photo/stunning-square-portrait-adorable-cute-cat_181624-37290.jpg?t=st=1717158160~exp=1717161760~hmac=1cab70094d4601341be6de4fbdb87dd499a225fa21b18b33ff909c9635c152ec&w=740',
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       Positioned(
                         left: 16,
                         top: 8,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios_new,
-                            size: 30,
+                        child: InkWell(
+                          onTap: () => context.router.popForced(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 30,
+                            ),
                           ),
                         ),
                       ),
@@ -129,17 +146,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       bottomRight: Radius.circular(20),
                     ),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Цена',
-                        style: TextStyle(
+                        '${widget.product.price} р.',
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'История цены',
                         style: TextStyle(
                           fontSize: 16,
@@ -351,26 +368,56 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Характеристики и описание',
                         style: TextStyle(fontWeight: FontWeight.w800),
                       ),
                       Text(
-                        'Название склада',
-                        style: TextStyle(
+                        widget.product.categories?.map((e) => e?.name).toList().join(', ') ?? '',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Text(
+                        widget.product.description ?? '',
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                       ),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                InkWell(
+                  onTap: () => context.read<CartBloc>().add(
+                        CartEvent.addProduct(widget.product),
+                      ),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.purple[100],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'В корзину',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -390,10 +437,14 @@ class _OtherProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: Container(
-        color: color ?? Colors.grey[200],
-        width: 50,
-        height: 75,
+      child: Shimmer.fromColors(
+        baseColor: Colors.white,
+        highlightColor: Colors.grey,
+        child: Container(
+          color: color ?? Colors.grey[200],
+          width: 50,
+          height: 75,
+        ),
       ),
     );
   }

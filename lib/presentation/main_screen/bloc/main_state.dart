@@ -7,6 +7,7 @@ sealed class MainState with _$MainState {
 
   factory MainState.loaded({
     final String? user,
-    @Default([]) final List<Categorie> categories,
+    @Default([]) final List<ProductCategorie> categories,
+    @Default([]) final List<Product> products,
   }) = _LoadedMainState;
 }
